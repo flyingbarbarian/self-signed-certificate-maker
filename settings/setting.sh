@@ -20,7 +20,7 @@ EXPIRATION=3650
 ####################
 TODAY=`date "+%Y%m%d%k%M%S"`
 
-# 出力先のフォルダ
+# 証明書のなどの出力先のディレクトリ
 # git管理対象外のディレクトリを指定しているので、変更する場合は注意して下さい。
 RESULTS="./results/${TODAY}/"
 
@@ -35,5 +35,15 @@ CERTIFICATE_SIGNING_REQUEST_NAME="${RESULTS}certificate-signing-request.csr"
 
 # 証明書の名前
 CERTIFICATE_NAME="${RESULTS}certificate.crt"
+
+####################
+# 発行履歴設定
+####################
+# 発行履歴を作成するか（作成しない場合：0、作成する場合：1）
+HISROY_USE=1
+
+# 発行履歴のファイル名
+# git管理対象外のディレクトリを指定しているので、変更する場合は注意して下さい。
+HISTORY="./histories/history.csv"
 
 return 0
