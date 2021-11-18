@@ -27,10 +27,7 @@ RESULTS="./results/${TODAY}/"
 # 秘密鍵の名前
 PRIVATE_KEY_NAME="${RESULTS}private-key.pem"
 
-# 公開鍵の名前
-PUBLIC_KEY_NAME="${RESULTS}public-key.pem"
-
-# 証明書署名要求の名前
+# 証明書署名要求（CSR）の名前
 CERTIFICATE_SIGNING_REQUEST_NAME="${RESULTS}certificate-signing-request.csr"
 
 # 証明書の名前
