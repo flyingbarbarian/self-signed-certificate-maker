@@ -16,11 +16,14 @@ mkdir $RESULTS
 # 秘密鍵の生成
 openssl genrsa -out $PRIVATE_KEY_NAME $PRIVATE_KEY_NUMBITS
 
-# 自己署名証明書の作成（-batchオプションで質問をスキップ）
+# 証明書署名要求（CSR）の作成（-batchオプションで質問をスキップ）
 openssl req -new -key $PRIVATE_KEY_NAME -out $CERTIFICATE_SIGNING_REQUEST_NAME -batch
 
 # オレオレ証明書の発行
 openssl x509 -req -in $CERTIFICATE_SIGNING_REQUEST_NAME -signkey $PRIVATE_KEY_NAME -out $CERTIFICATE_NAME -days $EXPIRATION
+
+# 証明書署名要求（CSR）の削除
+rm $CERTIFICATE_SIGNING_REQUEST_NAME
 
 
 ####################
@@ -35,10 +38,10 @@ fi
 # history.csvが存在しない場合は、ファイルを作成してヘッダ行を追加する。
 if [ ! -f $HISTORY ]
 then
-    echo "発行時刻, 公開鍵暗号方式, 秘密鍵の長さ, 秘密鍵の暗号化, 証明書有効期限, 秘密鍵名, CSR名, 証明書名" > $HISTORY
+    echo "発行時刻, 公開鍵暗号方式, 秘密鍵の長さ, 秘密鍵の暗号化, 証明書有効期限, 秘密鍵名, 証明書名" > $HISTORY
 fi
 
 # 履歴の作成
-echo "${TODAY}, ${PUBLIC_KEY_CRYPTOSYSTEM}, ${PRIVATE_KEY_NUMBITS}, ${PRIVATE_KEY_ENCRYPTION}, ${EXPIRATION}, ${PRIVATE_KEY_NAME}, ${CERTIFICATE_SIGNING_REQUEST_NAME}, ${CERTIFICATE_NAME}" >> $HISTORY
+echo "${TODAY}, ${PUBLIC_KEY_CRYPTOSYSTEM}, ${PRIVATE_KEY_NUMBITS}, ${PRIVATE_KEY_ENCRYPTION}, ${EXPIRATION}, ${PRIVATE_KEY_NAME}, ${CERTIFICATE_NAME}" >> $HISTORY
 
 exit 0
