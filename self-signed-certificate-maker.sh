@@ -17,7 +17,8 @@ mkdir $RESULTS
 openssl genrsa -out $PRIVATE_KEY_NAME $PRIVATE_KEY_NUMBITS
 
 # 証明書署名要求（CSR）の作成（-batchオプションで質問をスキップ）
-openssl req -new -key $PRIVATE_KEY_NAME -out $CERTIFICATE_SIGNING_REQUEST_NAME -batch
+openssl req -new -key $PRIVATE_KEY_NAME -out $CERTIFICATE_SIGNING_REQUEST_NAME -batch \
+ -addext "subjectAltName = DNS:${DNS}"
 
 # オレオレ証明書の発行
 openssl x509 -req -in $CERTIFICATE_SIGNING_REQUEST_NAME -signkey $PRIVATE_KEY_NAME -out $CERTIFICATE_NAME -days $EXPIRATION

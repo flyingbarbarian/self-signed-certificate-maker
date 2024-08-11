@@ -15,6 +15,10 @@ PRIVATE_KEY_ENCRYPTION=""
 # 証明書の有効期限
 EXPIRATION=3650
 
+# hostsファイルで設定したdomainを見に行く設定
+# choromeはSANが設定されていないと警告が出て画面が表示出来ない
+DNS="localhost"
+
 ####################
 # 出力設定
 ####################
